@@ -1,7 +1,11 @@
 import { DataSource } from 'typeorm';
 import dotenv from 'dotenv';
-import { NamedJson } from 'src/entities/NamedJson';
-import { Match } from 'src/entities/Match';
+import { Games } from 'src/entities/Games';
+import { Leagues } from 'src/entities/Leagues';
+import { Periods } from 'src/entities/Periods';
+import { Teams } from 'src/entities/Teams';
+import { Users } from 'src/entities/Users';
+import { Favorites } from 'src/entities/Favorites';
 
 dotenv.config();
 
@@ -11,10 +15,14 @@ const dataSource = new DataSource({
   port: 3306,
   username: 'root',
   password: '1234',
-  database: 'named',
+  database: 'mini',
     entities: [
-      NamedJson,
-      Match
+        Favorites,
+        Games,
+        Leagues,
+        Periods,
+        Teams,
+        Users
     ],
   migrations: [__dirname + '/src/migrations/*.ts'],
   synchronize: false,

@@ -3,9 +3,15 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { NamedJson } from './entities/NamedJson';
-import { Match } from './entities/Match';
 import { UserModule } from './user/user.module';
+import { Favorites } from './entities/Favorites';
+import { Games } from './entities/Games';
+import { Leagues } from './entities/Leagues';
+import { Periods } from './entities/Periods';
+import { Users } from './entities/Users';
+import { Teams } from './entities/Teams';
+import { GamesModule } from './games/games.module';
+import { NamedModule } from './named/named.module';
 
 @Module({
   imports: [
@@ -19,11 +25,15 @@ import { UserModule } from './user/user.module';
       port: 3306,
       username: 'root',
       password: '1234',
-      database: 'named',
+      database: 'mini',
       autoLoadEntities: true,
       entities: [
-        NamedJson,
-        Match
+        Favorites,
+        Games,
+        Leagues,
+        Periods,
+        Teams,
+        Users
       ],
       keepConnectionAlive: true,
       migrations: [__dirname + '/migrations/*.ts'],
@@ -31,8 +41,9 @@ import { UserModule } from './user/user.module';
       synchronize: true,
       logging: true,
     }),
-    TypeOrmModule.forFeature([NamedJson, Match]),
-    UserModule
+    UserModule,
+    GamesModule,
+    NamedModule
   ],
   controllers: [AppController],
   providers: [AppService],

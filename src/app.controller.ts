@@ -26,7 +26,8 @@ export class AppController {
 
     const baseball = resData.data.baseball;
 
-    return this.appService.dataSort(baseball);
+    // return this.appService.dataSort(baseball);
+    return null;
   }
 
 }

@@ -1,26 +1,40 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  Index,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Favorites } from "./Favorites";
 
-@Entity({schema: 'named', name: 'users'})
+@Index("unique_tele_id", ["teleId"], { unique: true })
+@Index("IDX_2db62d5e5122c8cf3f6082029e", ["teleId"], { unique: true })
+@Entity("users", { schema: "mini" })
 export class Users {
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  id: number;
 
-    @PrimaryGeneratedColumn({type: 'int', name: 'id'})
-    id: number;
+  @Column("varchar", { name: "first_name", length: 255 })
+  firstName: string;
 
-    @Column({type: 'varchar', name: 'tele_id'})
-    tele_id: string;
+  @Column("varchar", { name: "last_name", length: 255 })
+  lastName: string;
 
-    @Column({type: 'varchar', name: 'first_name'})
-    first_name: string;
+  @Column("datetime", {
+    name: "createdAt",
+    default: () => "'current_timestamp(6)'",
+  })
+  createdAt: Date;
 
-    @Column({type: 'varchar', name: 'last_name'})
-    last_name: string;
+  @Column("datetime", { name: "updatedAt", default: () => "CURRENT_TIMESTAMP" })
+  updatedAt: Date;
 
-    @Column({type: 'int', name: 'money'})
-    money: number;
+  @Column("varchar", { name: "tele_id", unique: true, length: 255 })
+  teleId: string;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @Column("int", { name: "money" })
+  money: number;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @OneToMany(() => Favorites, (favorites) => favorites.user)
+  favorites: Favorites[];
 }

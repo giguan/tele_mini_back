@@ -1,6 +1,6 @@
 
 export class CreateTeleUserDto {
-    userId: string;
+    user_id: string;
 
     first_name: string;
 

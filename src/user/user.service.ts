@@ -20,8 +20,8 @@ export class UserService {
 
         const returned = await this.teleUserRepository
                 .findOne({
-                    where: {tele_id: telUserId},
-                    select: ['id', 'tele_id', 'first_name', 'last_name', 'money']
+                    where: { teleId: telUserId },
+                    select: ['id', 'teleId', 'firstName', 'lastName', 'money']
                 })
 
         return returned;
@@ -40,15 +40,15 @@ export class UserService {
 
             returned = await queryRunner.manager
                 .getRepository(Users)
-                .findOne({where: {tele_id: body.userId}})
+                .findOne({ where: { teleId: body.user_id } });
 
             console.log("returned : ",returned)
 
             if(!returned) {
                 await queryRunner.manager.getRepository(Users).save({
-                    "tele_id": body.userId,
-                    "first_name": body.first_name,
-                    "last_name": body.last_name,
+                    "teleId": body.user_id,
+                    "firstName": body.first_name,
+                    "lastName": body.last_name,
                     "money": 10000
                 });
             } 
