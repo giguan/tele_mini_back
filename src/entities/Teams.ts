@@ -1,14 +1,4 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Games } from "./Games";
-import { Leagues } from "./Leagues";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("league_id", ["leagueId"], {})
 @Entity("teams", { schema: "mini" })
@@ -21,6 +11,9 @@ export class Teams {
 
   @Column("varchar", { name: "team_name_kr", length: 255 })
   teamNameKr: string;
+
+  @Column("varchar", { name: "team_short_name_kr", nullable: true, length: 50 })
+  teamShortNameKr: string | null;
 
   @Column("int", { name: "league_id", nullable: true })
   leagueId: number | null;
@@ -52,17 +45,4 @@ export class Teams {
     default: () => "CURRENT_TIMESTAMP",
   })
   updatedAt: Date | null;
-
-  @OneToMany(() => Games, (games) => games.awayTeam)
-  games: Games[];
-
-  @OneToMany(() => Games, (games) => games.homeTeam)
-  games2: Games[];
-
-  @ManyToOne(() => Leagues, (leagues) => leagues.teams, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
-  })
-  @JoinColumn([{ name: "league_id", referencedColumnName: "leagueId" }])
-  league: Leagues;
 }

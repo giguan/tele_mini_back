@@ -1,12 +1,4 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Games } from "./Games";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("game_id", ["gameId"], {})
 @Entity("periods", { schema: "mini" })
@@ -39,11 +31,4 @@ export class Periods {
     default: () => "CURRENT_TIMESTAMP",
   })
   updatedAt: Date | null;
-
-  @ManyToOne(() => Games, (games) => games.periods, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
-  })
-  @JoinColumn([{ name: "game_id", referencedColumnName: "gameId" }])
-  game: Games;
 }

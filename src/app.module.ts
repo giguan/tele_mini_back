@@ -12,6 +12,17 @@ import { Users } from './entities/Users';
 import { Teams } from './entities/Teams';
 import { GamesModule } from './games/games.module';
 import { NamedModule } from './named/named.module';
+import { Odds } from './entities/Odds';
+import { Seasons } from './entities/Seasons';
+import { OddsModule } from './odds/odds.module';
+import { Customodds } from './entities/Customodds';
+import { Handicapodds } from './entities/Handicapodds';
+import { Overunderodds } from './entities/Overunderodds';
+import { Windrawloseodds } from './entities/Windrawloseodds';
+import { Bets } from './entities/Bets';
+import { BetsModule } from './bets/bets.module';
+import { ComboBets } from './entities/ComboBets';
+import { SingleBets } from './entities/SingleBets';
 
 @Module({
   imports: [
@@ -28,12 +39,21 @@ import { NamedModule } from './named/named.module';
       database: 'mini',
       autoLoadEntities: true,
       entities: [
+        Bets,
+        ComboBets,
+        Customodds,
         Favorites,
         Games,
+        Handicapodds,
         Leagues,
+        Odds,
+        Overunderodds,
         Periods,
+        Seasons,
+        SingleBets,
         Teams,
-        Users
+        Users,
+        Windrawloseodds
       ],
       keepConnectionAlive: true,
       migrations: [__dirname + '/migrations/*.ts'],
@@ -43,7 +63,9 @@ import { NamedModule } from './named/named.module';
     }),
     UserModule,
     GamesModule,
-    NamedModule
+    NamedModule,
+    OddsModule,
+    BetsModule
   ],
   controllers: [AppController],
   providers: [AppService],

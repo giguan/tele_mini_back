@@ -5,7 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Favorites } from "./Favorites";
+import { Bets } from "./Bets";
 
 @Index("unique_tele_id", ["teleId"], { unique: true })
 @Index("IDX_2db62d5e5122c8cf3f6082029e", ["teleId"], { unique: true })
@@ -35,6 +35,6 @@ export class Users {
   @Column("int", { name: "money" })
   money: number;
 
-  @OneToMany(() => Favorites, (favorites) => favorites.user)
-  favorites: Favorites[];
+  @OneToMany(() => Bets, (bets) => bets.user)
+  bets: Bets[];
 }

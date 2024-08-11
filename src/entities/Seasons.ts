@@ -1,14 +1,11 @@
 import {
   Column,
-  DataTypeNotSupportedError,
   Entity,
   Index,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Games } from "./Games";
 import { Leagues } from "./Leagues";
 
 @Index("league_id", ["leagueId"], {})
@@ -53,9 +50,6 @@ export class Seasons {
     default: () => "CURRENT_TIMESTAMP",
   })
   updatedAt: Date | null;
-
-  @OneToMany(() => Games, (games) => games.season)
-  games: Games[];
 
   @ManyToOne(() => Leagues, (leagues) => leagues.seasons, {
     onDelete: "RESTRICT",

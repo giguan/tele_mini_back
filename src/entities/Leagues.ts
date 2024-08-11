@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Seasons } from "./Seasons";
-import { Teams } from "./Teams";
 
 @Entity("leagues", { schema: "mini" })
 export class Leagues {
@@ -41,7 +40,4 @@ export class Leagues {
 
   @OneToMany(() => Seasons, (seasons) => seasons.league)
   seasons: Seasons[];
-
-  @OneToMany(() => Teams, (teams) => teams.league)
-  teams: Teams[];
 }

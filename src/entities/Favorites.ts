@@ -1,13 +1,4 @@
-import {
-  Column,
-  Entity,
-  Index,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Users } from "./Users";
-import { Games } from "./Games";
+import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
 
 @Index("user_id", ["userId"], {})
 @Index("game_id", ["gameId"], {})
@@ -24,22 +15,7 @@ export class Favorites {
 
   @Column("datetime", {
     name: "created_at",
-    nullable: true,
     default: () => "CURRENT_TIMESTAMP",
   })
-  createdAt: Date | null;
-
-  @ManyToOne(() => Users, (users) => users.favorites, {
-    onDelete: "CASCADE",
-    onUpdate: "RESTRICT",
-  })
-  @JoinColumn([{ name: "user_id", referencedColumnName: "id" }])
-  user: Users;
-
-  @ManyToOne(() => Games, (games) => games.favorites, {
-    onDelete: "CASCADE",
-    onUpdate: "RESTRICT",
-  })
-  @JoinColumn([{ name: "game_id", referencedColumnName: "gameId" }])
-  game: Games;
+  createdAt: Date;
 }
