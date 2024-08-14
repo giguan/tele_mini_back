@@ -23,6 +23,7 @@ import { Bets } from './entities/Bets';
 import { BetsModule } from './bets/bets.module';
 import { ComboBets } from './entities/ComboBets';
 import { SingleBets } from './entities/SingleBets';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -65,7 +66,8 @@ import { SingleBets } from './entities/SingleBets';
     GamesModule,
     NamedModule,
     OddsModule,
-    BetsModule
+    BetsModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
